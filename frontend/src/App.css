@@ -256,78 +256,149 @@ body {
   font-weight: 600;
 }
 
-.kundli-chart {
+.kundli-chart-wrapper {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
-  aspect-ratio: 1;
 }
 
-.chart-background {
+.kundli-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.kundli-houses-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
-.houses-grid {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
-
-.house {
+.house-position {
+  position: absolute;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
-.center-space {
-  grid-column: 2 / 4;
-  grid-row: 2 / 4;
-  background: rgba(151, 192, 92, 0.05);
-}
-
-.sign-number {
-  font-weight: 700;
-  color: var(--primary-color);
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
-}
-
-.sign-name {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.planets {
+.kundli-house {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
 }
 
-.planet {
-  background: var(--primary-color);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+.house-number {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.house-planets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.planet-label {
   font-size: 0.8rem;
   font-weight: 600;
-  white-space: nowrap;
+  color: #2c5f2d;
+  padding: 0.15rem 0.35rem;
+  background: rgba(44, 95, 45, 0.1);
+  border-radius: 3px;
+}
+
+.house-pos-12 {
+  top: 10%;
+  left: 15%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-1 {
+  top: 10%;
+  left: 40%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-2 {
+  top: 10%;
+  right: 15%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-11 {
+  top: 30%;
+  left: 5%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-3 {
+  top: 30%;
+  right: 5%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-10 {
+  top: 50%;
+  left: 5%;
+  width: 20%;
+  height: 18%;
+  transform: translateY(-50%);
+}
+
+.house-pos-4 {
+  top: 50%;
+  right: 5%;
+  width: 20%;
+  height: 18%;
+  transform: translateY(-50%);
+}
+
+.house-pos-9 {
+  bottom: 30%;
+  left: 5%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-5 {
+  bottom: 30%;
+  right: 5%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-8 {
+  bottom: 10%;
+  left: 15%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-7 {
+  bottom: 10%;
+  left: 40%;
+  width: 20%;
+  height: 18%;
+}
+
+.house-pos-6 {
+  bottom: 10%;
+  right: 15%;
+  width: 20%;
+  height: 18%;
 }
 
 .recent-charts-section {
@@ -421,7 +492,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .kundli-chart {
+  .kundli-chart-wrapper {
     max-width: 100%;
   }
 
@@ -440,21 +511,16 @@ body {
 }
 
 @media (max-width: 480px) {
-  .house {
-    font-size: 0.65rem;
-    padding: 0.25rem;
-  }
-
-  .sign-number {
-    font-size: 0.85rem;
-  }
-
-  .sign-name {
-    font-size: 0.6rem;
-  }
-
-  .planet {
+  .kundli-house {
     font-size: 0.7rem;
-    padding: 0.2rem 0.4rem;
+  }
+
+  .house-number {
+    font-size: 0.75rem;
+  }
+
+  .planet-label {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.25rem;
   }
 }

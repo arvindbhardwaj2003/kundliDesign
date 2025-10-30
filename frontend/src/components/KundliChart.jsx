@@ -5,28 +5,13 @@ const SIGN_NAMES = {
 };
 
 const PLANET_SYMBOLS = {
-  'Su': '☉', 'Mo': '☽', 'Ma': '♂', 'Me': '☿',
-  'Ju': '♃', 'Ve': '♀', 'Sa': '♄', 'Ra': '☊',
-  'Ke': '☋', 'Asc': 'AC'
+  'Su': 'Su', 'Mo': 'Mo', 'Ma': 'Ma', 'Me': 'Me',
+  'Ju': 'Ju', 'Ve': 'Ve', 'Sa': 'Sa', 'Ra': 'Ra',
+  'Ke': 'Ke', 'Asc': 'Asc', 'Ur': 'Ur', 'Ne': 'Ne', 'Pl': 'Pl'
 };
 
 export default function KundliChart({ chart, title }) {
   if (!chart) return null;
-
-  const houseOrder = [
-    { id: '12', position: 'top-left' },
-    { id: '1', position: 'top' },
-    { id: '2', position: 'top-right' },
-    { id: '11', position: 'left' },
-    { id: '3', position: 'right' },
-    { id: '10', position: 'bottom-left-inner' },
-    { id: '4', position: 'bottom-right-inner' },
-    { id: '9', position: 'bottom-left' },
-    { id: '5', position: 'bottom-right' },
-    { id: '8', position: 'bottom-left-outer' },
-    { id: '6', position: 'bottom-right-outer' },
-    { id: '7', position: 'bottom' }
-  ];
 
   const renderHouse = (houseId) => {
     const house = chart[houseId];
@@ -37,15 +22,14 @@ export default function KundliChart({ chart, title }) {
       : Object.keys(house.planets || {});
 
     return (
-      <div key={houseId} className={`house house-${houseId}`}>
-        <div className="sign-number">{house.sign_num}</div>
-        <div className="sign-name">{SIGN_NAMES[house.sign_num]}</div>
-        {house.asc && <div className="planet">AC</div>}
-        <div className="planets">
+      <div key={houseId} className={`kundli-house house-${houseId}`}>
+        <div className="house-number">{houseId}</div>
+        <div className="house-planets">
+          {house.asc && <span className="planet-label">Asc</span>}
           {planets.map((planet, idx) => (
-            <div key={idx} className="planet">
+            <span key={idx} className="planet-label">
               {PLANET_SYMBOLS[planet] || planet}
-            </div>
+            </span>
           ))}
         </div>
       </div>
@@ -55,38 +39,71 @@ export default function KundliChart({ chart, title }) {
   return (
     <div className="kundli-chart-container">
       <h3 className="chart-title">{title}</h3>
-      <div className="kundli-chart">
-        <svg className="chart-background" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="200,0 400,200 200,400 0,200" fill="none" stroke="#333" strokeWidth="2"/>
-          <line x1="200" y1="0" x2="200" y2="400" stroke="#333" strokeWidth="1"/>
-          <line x1="0" y1="200" x2="400" y2="200" stroke="#333" strokeWidth="1"/>
-          <line x1="100" y1="100" x2="300" y2="100" stroke="#333" strokeWidth="1"/>
-          <line x1="100" y1="300" x2="300" y2="300" stroke="#333" strokeWidth="1"/>
-          <line x1="100" y1="100" x2="100" y2="300" stroke="#333" strokeWidth="1"/>
-          <line x1="300" y1="100" x2="300" y2="300" stroke="#333" strokeWidth="1"/>
-          <line x1="100" y1="100" x2="0" y2="200" stroke="#333" strokeWidth="1"/>
-          <line x1="100" y1="300" x2="0" y2="200" stroke="#333" strokeWidth="1"/>
-          <line x1="300" y1="100" x2="400" y2="200" stroke="#333" strokeWidth="1"/>
-          <line x1="300" y1="300" x2="400" y2="200" stroke="#333" strokeWidth="1"/>
-          <line x1="200" y1="0" x2="100" y2="100" stroke="#333" strokeWidth="1"/>
-          <line x1="200" y1="0" x2="300" y2="100" stroke="#333" strokeWidth="1"/>
-          <line x1="200" y1="400" x2="100" y2="300" stroke="#333" strokeWidth="1"/>
-          <line x1="200" y1="400" x2="300" y2="300" stroke="#333" strokeWidth="1"/>
+      <div className="kundli-chart-wrapper">
+        <svg className="kundli-svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
+          <polygon
+            points="250,50 450,250 250,450 50,250"
+            fill="#fafad2"
+            stroke="#000"
+            strokeWidth="2"
+          />
+
+          <line x1="250" y1="50" x2="250" y2="450" stroke="#000" strokeWidth="2" />
+          <line x1="50" y1="250" x2="450" y2="250" stroke="#000" strokeWidth="2" />
+
+          <line x1="150" y1="150" x2="350" y2="150" stroke="#000" strokeWidth="2" />
+          <line x1="150" y1="350" x2="350" y2="350" stroke="#000" strokeWidth="2" />
+          <line x1="150" y1="150" x2="150" y2="350" stroke="#000" strokeWidth="2" />
+          <line x1="350" y1="150" x2="350" y2="350" stroke="#000" strokeWidth="2" />
+
+          <line x1="50" y1="250" x2="150" y2="150" stroke="#000" strokeWidth="2" />
+          <line x1="50" y1="250" x2="150" y2="350" stroke="#000" strokeWidth="2" />
+          <line x1="450" y1="250" x2="350" y2="150" stroke="#000" strokeWidth="2" />
+          <line x1="450" y1="250" x2="350" y2="350" stroke="#000" strokeWidth="2" />
+
+          <line x1="250" y1="50" x2="150" y2="150" stroke="#000" strokeWidth="2" />
+          <line x1="250" y1="50" x2="350" y2="150" stroke="#000" strokeWidth="2" />
+          <line x1="250" y1="450" x2="150" y2="350" stroke="#000" strokeWidth="2" />
+          <line x1="250" y1="450" x2="350" y2="350" stroke="#000" strokeWidth="2" />
         </svg>
-        <div className="houses-grid">
-          {renderHouse('12')}
-          {renderHouse('1')}
-          {renderHouse('2')}
-          {renderHouse('11')}
-          <div className="center-space"></div>
-          {renderHouse('3')}
-          {renderHouse('10')}
-          {renderHouse('4')}
-          {renderHouse('9')}
-          {renderHouse('5')}
-          {renderHouse('8')}
-          {renderHouse('7')}
-          {renderHouse('6')}
+
+        <div className="kundli-houses-overlay">
+          <div className="house-position house-pos-12">
+            {renderHouse('12')}
+          </div>
+          <div className="house-position house-pos-1">
+            {renderHouse('1')}
+          </div>
+          <div className="house-position house-pos-2">
+            {renderHouse('2')}
+          </div>
+          <div className="house-position house-pos-11">
+            {renderHouse('11')}
+          </div>
+          <div className="house-position house-pos-3">
+            {renderHouse('3')}
+          </div>
+          <div className="house-position house-pos-10">
+            {renderHouse('10')}
+          </div>
+          <div className="house-position house-pos-4">
+            {renderHouse('4')}
+          </div>
+          <div className="house-position house-pos-9">
+            {renderHouse('9')}
+          </div>
+          <div className="house-position house-pos-5">
+            {renderHouse('5')}
+          </div>
+          <div className="house-position house-pos-8">
+            {renderHouse('8')}
+          </div>
+          <div className="house-position house-pos-7">
+            {renderHouse('7')}
+          </div>
+          <div className="house-position house-pos-6">
+            {renderHouse('6')}
+          </div>
         </div>
       </div>
     </div>

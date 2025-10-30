@@ -75,28 +75,43 @@ function App() {
 
       <header className="app-header">
         <div className="header-content">
-          <div className="zodiac-symbols">
-            <span className="zodiac-symbol" title="Aries">♈</span>
-            <span className="zodiac-symbol" title="Taurus">♉</span>
-            <span className="zodiac-symbol" title="Gemini">♊</span>
-            <span className="zodiac-symbol" title="Cancer">♋</span>
-            <span className="zodiac-symbol" title="Leo">♌</span>
-            <span className="zodiac-symbol" title="Virgo">♍</span>
+          <div className="header-left">
+            <a href="/" className="logo">
+              <span className="logo-icon">🔮</span>
+              <span className="logo-text">Kundli</span>
+            </a>
+            <nav>
+              <ul className="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chart">Charts</a></li>
+                <li><a href="#about">About</a></li>
+              </ul>
+            </nav>
           </div>
-          <h1>Vedic Kundli Generator</h1>
-          <p className="subtitle">✨ Discover Your Cosmic Blueprint ✨</p>
+          <div className="header-right">
+            <div className="zodiac-symbols">
+              <span className="zodiac-symbol" title="Aries">♈</span>
+              <span className="zodiac-symbol" title="Taurus">♉</span>
+              <span className="zodiac-symbol" title="Gemini">♊</span>
+              <span className="zodiac-symbol" title="Cancer">♋</span>
+              <span className="zodiac-symbol" title="Leo">♌</span>
+              <span className="zodiac-symbol" title="Virgo">♍</span>
+            </div>
+          </div>
         </div>
       </header>
 
       <main className="app-main">
         {!kundliData && (
-          <div className="form-container">
-            <BirthDataForm onSubmit={generateKundli} isLoading={isLoading} />
-            {error && (
-              <div className="error-banner">
-                <strong>Error:</strong> {error}
-              </div>
-            )}
+          <div className="main-container">
+            <div className="form-container">
+              <BirthDataForm onSubmit={generateKundli} isLoading={isLoading} />
+              {error && (
+                <div className="error-banner">
+                  <strong>Error:</strong> {error}
+                </div>
+              )}
+            </div>
           </div>
         )}
 

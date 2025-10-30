@@ -282,6 +282,13 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
       </div>
 
       <button type="submit" className="submit-button" disabled={isLoading || isGeocoding}>
+        {isLoading && (
+          <span className="jupiter-loader">
+            <div className="jupiter-core"></div>
+            <div className="jupiter-ring"></div>
+            <div className="jupiter-ring"></div>
+          </span>
+        )}
         {isLoading ? 'Generating Kundli...' : 'Generate Kundli'}
       </button>
     </form>

@@ -67,9 +67,25 @@ function App() {
 
   return (
     <div className="app">
+      <div className="cosmic-bg">
+        <div className="planet planet-1"></div>
+        <div className="planet planet-2"></div>
+        <div className="planet planet-3"></div>
+      </div>
+
       <header className="app-header">
-        <h1>Vedic Kundli Generator</h1>
-        <p className="subtitle">Generate accurate Vedic astrology birth charts</p>
+        <div className="header-content">
+          <div className="zodiac-symbols">
+            <span className="zodiac-symbol" title="Aries">♈</span>
+            <span className="zodiac-symbol" title="Taurus">♉</span>
+            <span className="zodiac-symbol" title="Gemini">♊</span>
+            <span className="zodiac-symbol" title="Cancer">♋</span>
+            <span className="zodiac-symbol" title="Leo">♌</span>
+            <span className="zodiac-symbol" title="Virgo">♍</span>
+          </div>
+          <h1>Vedic Kundli Generator</h1>
+          <p className="subtitle">✨ Discover Your Cosmic Blueprint ✨</p>
+        </div>
       </header>
 
       <main className="app-main">

@@ -16,13 +16,15 @@ function App() {
     setError(null);
 
     try {
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-kundli`;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://wxuqwkpqrgcxrcglhbhz.supabase.co';
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4dXF3a3BxcmdjeHJjZ2xoYmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MjQ0NDAsImV4cCI6MjA3NzQwMDQ0MH0.ZKZSaABQHV1f5YilRIPtdYnNKbfdk-gESYgAx3GMVDo';
+      const apiUrl = `${supabaseUrl}/functions/v1/generate-kundli`;
 
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${supabaseKey}`,
         },
         body: JSON.stringify(birthData),
       });

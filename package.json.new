@@ -1,14 +1,13 @@
 {
-  "name": "kundli-generator",
+  "name": "frontend",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
-  "description": "Vedic Kundli Generator React Application",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
+    "dev": "npx vite",
+    "build": "npx vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "npx vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.77.0",
@@ -25,8 +24,5 @@
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
     "vite": "^7.1.7"
-  },
-  "keywords": ["kundli", "astrology", "vedic", "react"],
-  "author": "",
-  "license": "ISC"
+  }
 }

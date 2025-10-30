@@ -9,11 +9,56 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
     hour: 0,
     minute: 0,
     utcOffset: '+0',
+    city: '',
     latitude: 0,
     longitude: 0,
   });
 
   const [errors, setErrors] = useState({});
+  const [isGeocoding, setIsGeocoding] = useState(false);
+
+  const geocodeCity = async (cityName) => {
+    if (!cityName.trim()) {
+      return null;
+    }
+
+    setIsGeocoding(true);
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`
+      );
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        return {
+          latitude: parseFloat(data[0].lat),
+          longitude: parseFloat(data[0].lon),
+        };
+      }
+      return null;
+    } catch (error) {
+      console.error('Geocoding error:', error);
+      return null;
+    } finally {
+      setIsGeocoding(false);
+    }
+  };
+
+  const handleCityBlur = async () => {
+    if (formData.city.trim()) {
+      const coords = await geocodeCity(formData.city);
+      if (coords) {
+        setFormData((prev) => ({
+          ...prev,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        }));
+        setErrors((prev) => ({ ...prev, city: undefined }));
+      } else {
+        setErrors((prev) => ({ ...prev, city: 'City not found. Please check the name.' }));
+      }
+    }
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -42,6 +87,10 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
       newErrors.minute = 'Minute must be between 0 and 59';
     }
 
+    if (!formData.city.trim() && (formData.latitude === 0 && formData.longitude === 0)) {
+      newErrors.city = 'City name is required';
+    }
+
     if (formData.latitude < -90 || formData.latitude > 90) {
       newErrors.latitude = 'Latitude must be between -90 and 90';
     }
@@ -65,7 +114,7 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'name' || name === 'utcOffset' ? value : parseFloat(value) || 0,
+      [name]: name === 'name' || name === 'utcOffset' || name === 'city' ? value : parseFloat(value) || 0,
     }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -181,9 +230,26 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
 
       <div className="form-section">
         <h3>Birth Location</h3>
+        <div className="form-group">
+          <label htmlFor="city">City Name *</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            onBlur={handleCityBlur}
+            className={errors.city ? 'error' : ''}
+            placeholder="e.g., New Delhi, Mumbai, New York"
+            disabled={isGeocoding}
+          />
+          {isGeocoding && <span className="info-message">Searching location...</span>}
+          {errors.city && <span className="error-message">{errors.city}</span>}
+        </div>
+
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="latitude">Latitude *</label>
+            <label htmlFor="latitude">Latitude (auto-filled)</label>
             <input
               type="number"
               id="latitude"
@@ -193,11 +259,12 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
               onChange={handleChange}
               className={errors.latitude ? 'error' : ''}
               placeholder="e.g., 28.6139"
+              readOnly
             />
             {errors.latitude && <span className="error-message">{errors.latitude}</span>}
           </div>
           <div className="form-group">
-            <label htmlFor="longitude">Longitude *</label>
+            <label htmlFor="longitude">Longitude (auto-filled)</label>
             <input
               type="number"
               id="longitude"
@@ -207,13 +274,14 @@ export default function BirthDataForm({ onSubmit, isLoading }) {
               onChange={handleChange}
               className={errors.longitude ? 'error' : ''}
               placeholder="e.g., 77.2090"
+              readOnly
             />
             {errors.longitude && <span className="error-message">{errors.longitude}</span>}
           </div>
         </div>
       </div>
 
-      <button type="submit" className="submit-button" disabled={isLoading}>
+      <button type="submit" className="submit-button" disabled={isLoading || isGeocoding}>
         {isLoading ? 'Generating Kundli...' : 'Generate Kundli'}
       </button>
     </form>

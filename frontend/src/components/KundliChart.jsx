@@ -22,89 +22,84 @@ export default function KundliChart({ chart, title }) {
       : Object.keys(house.planets || {});
 
     return (
-      <div key={houseId} className={`kundli-house house-${houseId}`}>
-        <div className="house-number">{houseId}</div>
-        <div className="house-planets">
-          {house.asc && <span className="planet-label">Asc</span>}
-          {planets.map((planet, idx) => (
-            <span key={idx} className="planet-label">
-              {PLANET_SYMBOLS[planet] || planet}
-            </span>
-          ))}
-        </div>
-      </div>
+      <g key={houseId}>
+        <text className="house-number" textAnchor="middle">
+          {houseId}
+        </text>
+        {house.asc && (
+          <text className="house-label-small" textAnchor="middle">
+            {houseId === '1' ? 'Ascendant' : houseId === '7' ? 'Descendant' : ''}
+          </text>
+        )}
+        {planets.length > 0 && (
+          <text className="planet-text" textAnchor="middle">
+            {planets.map(p => PLANET_SYMBOLS[p] || p).join(', ')}
+          </text>
+        )}
+      </g>
     );
   };
 
   return (
     <div className="kundli-chart-container">
       <h3 className="chart-title">{title}</h3>
-      <div className="kundli-chart-wrapper">
-        <svg className="kundli-svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
-          <polygon
-            points="250,50 450,250 250,450 50,250"
-            fill="#fafad2"
-            stroke="#000"
-            strokeWidth="2"
-          />
+      <div className="kundli-north-wrapper">
+        <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
+          <rect className="outer-square" x="50" y="50" width="400" height="400"/>
 
-          <line x1="250" y1="50" x2="250" y2="450" stroke="#000" strokeWidth="2" />
-          <line x1="50" y1="250" x2="450" y2="250" stroke="#000" strokeWidth="2" />
+          <line className="diagonal-line" x1="50" y1="50" x2="450" y2="450"/>
+          <line className="diagonal-line" x1="450" y1="50" x2="50" y2="450"/>
 
-          <line x1="150" y1="150" x2="350" y2="150" stroke="#000" strokeWidth="2" />
-          <line x1="150" y1="350" x2="350" y2="350" stroke="#000" strokeWidth="2" />
-          <line x1="150" y1="150" x2="150" y2="350" stroke="#000" strokeWidth="2" />
-          <line x1="350" y1="150" x2="350" y2="350" stroke="#000" strokeWidth="2" />
+          <polygon className="inner-square" points="250,50 450,250 250,450 50,250"/>
 
-          <line x1="50" y1="250" x2="150" y2="150" stroke="#000" strokeWidth="2" />
-          <line x1="50" y1="250" x2="150" y2="350" stroke="#000" strokeWidth="2" />
-          <line x1="450" y1="250" x2="350" y2="150" stroke="#000" strokeWidth="2" />
-          <line x1="450" y1="250" x2="350" y2="350" stroke="#000" strokeWidth="2" />
-
-          <line x1="250" y1="50" x2="150" y2="150" stroke="#000" strokeWidth="2" />
-          <line x1="250" y1="50" x2="350" y2="150" stroke="#000" strokeWidth="2" />
-          <line x1="250" y1="450" x2="150" y2="350" stroke="#000" strokeWidth="2" />
-          <line x1="250" y1="450" x2="350" y2="350" stroke="#000" strokeWidth="2" />
-        </svg>
-
-        <div className="kundli-houses-overlay">
-          <div className="house-position house-pos-12">
-            {renderHouse('12')}
-          </div>
-          <div className="house-position house-pos-1">
+          <g transform="translate(250, 120)">
             {renderHouse('1')}
-          </div>
-          <div className="house-position house-pos-2">
+          </g>
+
+          <g transform="translate(350, 110)">
             {renderHouse('2')}
-          </div>
-          <div className="house-position house-pos-11">
-            {renderHouse('11')}
-          </div>
-          <div className="house-position house-pos-3">
+          </g>
+
+          <g transform="translate(390, 180)">
             {renderHouse('3')}
-          </div>
-          <div className="house-position house-pos-10">
-            {renderHouse('10')}
-          </div>
-          <div className="house-position house-pos-4">
+          </g>
+
+          <g transform="translate(380, 250)">
             {renderHouse('4')}
-          </div>
-          <div className="house-position house-pos-9">
-            {renderHouse('9')}
-          </div>
-          <div className="house-position house-pos-5">
+          </g>
+
+          <g transform="translate(390, 320)">
             {renderHouse('5')}
-          </div>
-          <div className="house-position house-pos-8">
-            {renderHouse('8')}
-          </div>
-          <div className="house-position house-pos-7">
-            {renderHouse('7')}
-          </div>
-          <div className="house-position house-pos-6">
+          </g>
+
+          <g transform="translate(350, 390)">
             {renderHouse('6')}
-          </div>
-        </div>
+          </g>
+
+          <g transform="translate(250, 380)">
+            {renderHouse('7')}
+          </g>
+
+          <g transform="translate(150, 390)">
+            {renderHouse('8')}
+          </g>
+
+          <g transform="translate(110, 320)">
+            {renderHouse('9')}
+          </g>
+
+          <g transform="translate(120, 250)">
+            {renderHouse('10')}
+          </g>
+
+          <g transform="translate(110, 180)">
+            {renderHouse('11')}
+          </g>
+
+          <g transform="translate(150, 110)">
+            {renderHouse('12')}
+          </g>
+        </svg>
       </div>
     </div>
   );

@@ -256,149 +256,62 @@ body {
   font-weight: 600;
 }
 
-.kundli-chart-wrapper {
-  position: relative;
+.kundli-north-wrapper {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-.kundli-svg {
+.kundli-north-wrapper svg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.kundli-houses-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+.outer-square {
+  fill: none;
+  stroke: #2c3e50;
+  stroke-width: 3;
 }
 
-.house-position {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.diagonal-line {
+  stroke: #2c3e50;
+  stroke-width: 2;
 }
 
-.kundli-house {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.85rem;
+.inner-square {
+  fill: none;
+  stroke: #2c3e50;
+  stroke-width: 2;
 }
 
 .house-number {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  fill: #e74c3c;
+  dominant-baseline: middle;
 }
 
-.house-planets {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
+.house-label-small {
+  font-size: 11px;
+  fill: #7f8c8d;
+  dominant-baseline: hanging;
+  transform: translateY(15px);
 }
 
-.planet-label {
-  font-size: 0.8rem;
+.planet-text {
+  font-size: 10px;
+  fill: #2c5f2d;
   font-weight: 600;
-  color: #2c5f2d;
-  padding: 0.15rem 0.35rem;
-  background: rgba(44, 95, 45, 0.1);
-  border-radius: 3px;
+  dominant-baseline: hanging;
+  transform: translateY(18px);
 }
 
-.house-pos-12 {
-  top: 10%;
-  left: 15%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-1 {
-  top: 10%;
-  left: 40%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-2 {
-  top: 10%;
-  right: 15%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-11 {
-  top: 30%;
-  left: 5%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-3 {
-  top: 30%;
-  right: 5%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-10 {
-  top: 50%;
-  left: 5%;
-  width: 20%;
-  height: 18%;
-  transform: translateY(-50%);
-}
-
-.house-pos-4 {
-  top: 50%;
-  right: 5%;
-  width: 20%;
-  height: 18%;
-  transform: translateY(-50%);
-}
-
-.house-pos-9 {
-  bottom: 30%;
-  left: 5%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-5 {
-  bottom: 30%;
-  right: 5%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-8 {
-  bottom: 10%;
-  left: 15%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-7 {
-  bottom: 10%;
-  left: 40%;
-  width: 20%;
-  height: 18%;
-}
-
-.house-pos-6 {
-  bottom: 10%;
-  right: 15%;
-  width: 20%;
-  height: 18%;
+.info-message {
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 .recent-charts-section {
@@ -492,7 +405,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .kundli-chart-wrapper {
+  .kundli-north-wrapper {
     max-width: 100%;
   }
 
@@ -511,16 +424,15 @@ body {
 }
 
 @media (max-width: 480px) {
-  .kundli-house {
-    font-size: 0.7rem;
-  }
-
   .house-number {
-    font-size: 0.75rem;
+    font-size: 12px;
   }
 
-  .planet-label {
-    font-size: 0.65rem;
-    padding: 0.1rem 0.25rem;
+  .house-label-small {
+    font-size: 9px;
+  }
+
+  .planet-text {
+    font-size: 8px;
   }
 }

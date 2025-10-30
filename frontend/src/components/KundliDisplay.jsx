@@ -1,4 +1,5 @@
 import KundliChart from './KundliChart';
+import PlanetaryPositions from './PlanetaryPositions';
 
 export default function KundliDisplay({ kundliData }) {
   if (!kundliData) return null;
@@ -8,16 +9,21 @@ export default function KundliDisplay({ kundliData }) {
       <div className="kundli-header">
         <h2>{kundliData.name}'s Kundli</h2>
         <div className="birth-info">
-          <p>
+          <span>
             <strong>Birth Date:</strong>{' '}
             {new Date(kundliData.birth_datetime).toLocaleString()}
-          </p>
-          <p>
+          </span>
+          <span>
             <strong>Location:</strong> {kundliData.latitude.toFixed(4)}°,{' '}
             {kundliData.longitude.toFixed(4)}° (UTC {kundliData.utc_offset})
-          </p>
+          </span>
         </div>
       </div>
+
+      <PlanetaryPositions
+        chart={kundliData.lagna_chart}
+        title="ग्रह स्थिति (Planetary Positions)"
+      />
 
       <div className="charts-grid">
         <KundliChart chart={kundliData.lagna_chart} title="Lagna Chart (Birth Chart)" />

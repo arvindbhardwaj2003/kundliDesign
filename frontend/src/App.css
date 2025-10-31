@@ -1094,3 +1094,60 @@ body::before {
     transition-duration: 0.01ms !important;
   }
 }
+
+.zodiac-wheel-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background-image: url('/image.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  animation: rotateZodiac 120s linear infinite;
+}
+
+@keyframes rotateZodiac {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.hero-section .zodiac-wheel-bg {
+  opacity: 0.25;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+@media (max-width: 768px) {
+  .zodiac-wheel-bg {
+    width: 400px;
+    height: 400px;
+    opacity: 0.1;
+  }
+  
+  .hero-section .zodiac-wheel-bg {
+    width: 300px;
+    height: 300px;
+    opacity: 0.15;
+  }
+}
+
+@media (max-width: 480px) {
+  .zodiac-wheel-bg {
+    width: 280px;
+    height: 280px;
+    opacity: 0.08;
+  }
+}

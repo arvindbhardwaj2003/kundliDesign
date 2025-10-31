@@ -68,6 +68,7 @@ function App() {
   return (
     <div className="app">
       <div className="cosmic-bg">
+        <div className="zodiac-wheel-bg"></div>
         <div className="planet planet-1"></div>
         <div className="planet planet-2"></div>
         <div className="planet planet-3"></div>

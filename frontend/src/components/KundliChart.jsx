@@ -13,7 +13,7 @@ const PLANET_SYMBOLS = {
 export default function KundliChart({ chart, title }) {
   if (!chart) return null;
 
-  const renderHouse = (houseId) => {
+  const renderHouse = (houseId, index) => {
     const house = chart[houseId];
     if (!house) return null;
 
@@ -22,7 +22,7 @@ export default function KundliChart({ chart, title }) {
       : Object.keys(house.planets || {});
 
     return (
-      <g key={houseId}>
+      <g key={houseId} style={{ animation: `houseNumberSlide 0.4s ease-out ${index * 0.05}s both` }}>
         <text className="house-number" textAnchor="middle">
           {houseId}
         </text>
@@ -32,7 +32,11 @@ export default function KundliChart({ chart, title }) {
           </text>
         )}
         {planets.length > 0 && (
-          <text className="planet-text" textAnchor="middle">
+          <text
+            className="planet-text"
+            textAnchor="middle"
+            style={{ animation: `planetPop 0.5s ease-out ${index * 0.05 + 0.2}s both` }}
+          >
             {planets.map(p => PLANET_SYMBOLS[p] || p).join(', ')}
           </text>
         )}
@@ -41,7 +45,7 @@ export default function KundliChart({ chart, title }) {
   };
 
   return (
-    <div className="kundli-chart-container">
+    <div className="kundli-chart-container" style={{ animation: 'chartFadeIn 0.6s ease-out' }}>
       <h3 className="chart-title">{title}</h3>
       <div className="kundli-north-wrapper">
         <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
@@ -53,51 +57,51 @@ export default function KundliChart({ chart, title }) {
           <polygon className="inner-square" points="250,50 450,250 250,450 50,250"/>
 
           <g transform="translate(250, 120)">
-            {renderHouse('1')}
+            {renderHouse('1', 0)}
           </g>
 
           <g transform="translate(350, 110)">
-            {renderHouse('2')}
+            {renderHouse('2', 1)}
           </g>
 
           <g transform="translate(390, 180)">
-            {renderHouse('3')}
+            {renderHouse('3', 2)}
           </g>
 
           <g transform="translate(380, 250)">
-            {renderHouse('4')}
+            {renderHouse('4', 3)}
           </g>
 
           <g transform="translate(390, 320)">
-            {renderHouse('5')}
+            {renderHouse('5', 4)}
           </g>
 
           <g transform="translate(350, 390)">
-            {renderHouse('6')}
+            {renderHouse('6', 5)}
           </g>
 
           <g transform="translate(250, 380)">
-            {renderHouse('7')}
+            {renderHouse('7', 6)}
           </g>
 
           <g transform="translate(150, 390)">
-            {renderHouse('8')}
+            {renderHouse('8', 7)}
           </g>
 
           <g transform="translate(110, 320)">
-            {renderHouse('9')}
+            {renderHouse('9', 8)}
           </g>
 
           <g transform="translate(120, 250)">
-            {renderHouse('10')}
+            {renderHouse('10', 9)}
           </g>
 
           <g transform="translate(110, 180)">
-            {renderHouse('11')}
+            {renderHouse('11', 10)}
           </g>
 
           <g transform="translate(150, 110)">
-            {renderHouse('12')}
+            {renderHouse('12', 11)}
           </g>
         </svg>
       </div>

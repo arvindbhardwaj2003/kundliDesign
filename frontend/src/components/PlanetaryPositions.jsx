@@ -75,9 +75,18 @@ export default function PlanetaryPositions({ chart, title }) {
       <h3 className="positions-title">{title}</h3>
       <div className="positions-grid">
         {planetaryData.map((data, index) => (
-          <div key={index} className="planet-card">
+          <div
+            key={index}
+            className="planet-card"
+            style={{ animation: `slideInUp 0.5s ease-out ${index * 0.08}s both` }}
+          >
             <div className="planet-header">
-              <span className="planet-symbol">{data.planetInfo.symbol}</span>
+              <span
+                className="planet-symbol"
+                style={{ animation: `planetPop 0.6s ease-out ${index * 0.08 + 0.2}s both` }}
+              >
+                {data.planetInfo.symbol}
+              </span>
               <div className="planet-names">
                 <span className="planet-name-hindi">{data.planetInfo.hindi}</span>
                 <span className="planet-name-english">{data.planetInfo.english}</span>
@@ -85,18 +94,27 @@ export default function PlanetaryPositions({ chart, title }) {
             </div>
             <div className="planet-details">
               <div className="detail-row">
-                <span className="detail-label">राशि (Sign):</span>
+                <span className="detail-label">
+                  <span className="detail-icon">{data.sign.symbol}</span>
+                  राशि (Sign):
+                </span>
                 <span className="detail-value">
-                  {data.sign.symbol} {data.sign.hindi} ({data.sign.english})
+                  {data.sign.hindi} ({data.sign.english})
                 </span>
               </div>
               <div className="detail-row">
-                <span className="detail-label">भाव (House):</span>
+                <span className="detail-label">
+                  <span className="detail-icon">🏠</span>
+                  भाव (House):
+                </span>
                 <span className="detail-value">{data.house}</span>
               </div>
               {data.position && (
                 <div className="detail-row">
-                  <span className="detail-label">स्थिति (Position):</span>
+                  <span className="detail-label">
+                    <span className="detail-icon">📍</span>
+                    स्थिति (Position):
+                  </span>
                   <span className="detail-value position-degrees">{data.position}</span>
                 </div>
               )}

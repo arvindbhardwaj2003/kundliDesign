@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import BirthDataForm from './components/BirthDataForm';
 import KundliDisplay from './components/KundliDisplay';
+import PlanetCustomizer from './components/PlanetCustomizer';
 import { supabase } from './lib/supabase';
 import './App.css';
 
@@ -10,6 +11,12 @@ function App() {
   const [error, setError] = useState(null);
   const [recentCharts, setRecentCharts] = useState([]);
   const [showRecent, setShowRecent] = useState(false);
+  const [planetSettings, setPlanetSettings] = useState({
+    planetSize: 1,
+    planetOpacity: 0.5,
+    animationSpeed: 1,
+    colorTheme: 'blue'
+  });
 
   const generateKundli = async (birthData) => {
     setIsLoading(true);
@@ -65,20 +72,104 @@ function App() {
     setShowRecent(false);
   };
 
+  const handlePlanetSettingsChange = (newSettings) => {
+    setPlanetSettings(newSettings);
+  };
+
   return (
     <div className="app">
       <div className="cosmic-bg">
         <div className="zodiac-wheel-bg"></div>
-        <div className="planet planet-1"></div>
-        <div className="planet planet-2"></div>
-        <div className="planet planet-3"></div>
-        <div className="planet planet-4"></div>
-        <div className="planet planet-5"></div>
-        <div className="planet planet-6"></div>
-        <div className="planet planet-7"></div>
-        <div className="planet planet-8"></div>
-        <div className="planet planet-9"></div>
-        <div className="planet planet-10"></div>
+        <div
+          className="planet planet-1"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${20 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-2"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${15 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-3"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${18 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-4"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${16 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-5"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${22 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-6"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${19 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-7"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${17 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-8"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${21 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-9"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${14 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
+        <div
+          className="planet planet-10"
+          style={{
+            transform: `scale(${planetSettings.planetSize})`,
+            opacity: planetSettings.planetOpacity,
+            animationDuration: `${20 / planetSettings.animationSpeed}s`
+          }}
+          data-theme={planetSettings.colorTheme}
+        ></div>
       </div>
 
       <header className="app-header">
@@ -105,6 +196,7 @@ function App() {
               <span className="zodiac-symbol" title="Leo">♌</span>
               <span className="zodiac-symbol" title="Virgo">♍</span>
             </div>
+            <PlanetCustomizer onSettingsChange={handlePlanetSettingsChange} />
           </div>
         </div>
       </header>

@@ -72,6 +72,13 @@ function App() {
         <div className="planet planet-1"></div>
         <div className="planet planet-2"></div>
         <div className="planet planet-3"></div>
+        <div className="planet planet-4"></div>
+        <div className="planet planet-5"></div>
+        <div className="planet planet-6"></div>
+        <div className="planet planet-7"></div>
+        <div className="planet planet-8"></div>
+        <div className="planet planet-9"></div>
+        <div className="planet planet-10"></div>
       </div>
 
       <header className="app-header">
